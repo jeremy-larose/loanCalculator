@@ -1,5 +1,3 @@
-using System;
-
 namespace MortgageCalculator.Models
 {
     public class ErrorViewModel

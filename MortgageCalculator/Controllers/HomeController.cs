@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MortgageCalculator.Models;
-using System.Diagnostics;
 
 namespace MortgageCalculator.Controllers
 {
@@ -36,24 +36,24 @@ namespace MortgageCalculator.Controllers
                 Amount = 40000,
                 Term = 72
             };
-            
-            return View( loan );
+
+            return View(loan);
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult App( Loan loan )
+        public IActionResult App(Loan loan)
         {
             LoanHelper loanHelper = new();
-            Loan newLoan = loanHelper.GetPayments( loan );
-            
+            var newLoan = loanHelper.GetPayments(loan);
+
             return View(newLoan);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }
